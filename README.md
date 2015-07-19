@@ -28,16 +28,16 @@ Running the buildstep script will take an application tar via STDIN and an appli
 an argument. It will put the application in a new container based on `progrium/buildstep` with the specified name.
 Then it runs the builder script inside the container.
 
-    $ cat myapp.tar | ./buildstep myapp
+    $ cat {yourapp}.tar | ./buildstep {yourapp}
 
 If you didn't already have an application tar, you can create one on the fly.
 
-    $ tar cC /path/to/your/app . | ./buildstep myapp
+    $ tar cC /path/to/your/app . | ./buildstep {yourapp}
 
 The resulting container has a built app ready to go. The builder script also parses the Procfile and produces
 a starter script that takes a process type. Run your app with:
 
-    $ docker run -d myapp /bin/bash -c "/start web"
+    $ docker run -d -e PORT=5000 -p {PORT}:5000 {yourapp} /bin/bash -c '/start web'
 
 ## Custom Buildpacks
 
